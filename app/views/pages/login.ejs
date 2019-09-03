@@ -1,0 +1,53 @@
+<%- include("../common/app_page/top.ejs", {
+	body_style: "app_page"
+}) %>
+
+<div class="row">
+	<div class="col-md-3">
+	</div>
+	<div class="col-md-6">
+		<h1 class="text-center">Log In</h1>
+		<h5 class="text-center">San Francisco's 24-hour LGBTIQQ Ride Service</h5>
+		<br>
+		<br>
+        <div id="login_forms">
+            <div class="tab-content">
+                <div class="tab-pane container active" id="driver">
+                    <% include ../forms/driver_login.ejs %>
+                </div>
+                <div class="tab-pane container fade" id="rider">
+                    <% include ../forms/rider_login.ejs %>
+                </div>
+            </div>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#driver">
+                        Log in as a driver instead.
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#rider">	
+                        Log in as a rider instead.
+                    </a>
+                </li>
+            </ul>
+        </div>
+		<p class="text-center">
+			Don't have an account? Go to <a href="/signup">sign up</a> instead.
+		</p>
+	</div>
+	<div class="col-md-3">
+	</div>
+</div>
+
+<style>
+#login_forms li.nav-item {
+    width: 100%;
+    text-align: center;
+}
+#login_forms a.nav-link.active {
+    display: none;
+}
+</style>
+
+<% include ../common/app_page/bottom.ejs %>

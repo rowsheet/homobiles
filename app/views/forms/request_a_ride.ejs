@@ -1,0 +1,56 @@
+<div id="FORM_request_a_ride" class="card card_form purple">
+    <h5 class="card-header">
+        Request a Ride
+    </h5>
+    <div class="card-body">
+        <div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="material-icons">
+                        person
+                        </i>
+                    </div>
+                </div>
+                <input type="text" class="form-control" id="name" placeholder="Your Name">
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="material-icons">
+                        my_location
+                        </i>
+                    </div>
+                </div>
+                <input type="text" class="form-control" id="start_location" placeholder="Starting Point">
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="material-icons">
+                        map
+                        </i>
+                    </div>
+                </div>
+                <input type="text" class="form-control" id="end_location" placeholder="Destination">
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="material-icons">
+                        group
+                        </i>
+                    </div>
+                </div>
+                <input type="number" class="form-control" id="passenger_count" placeholder="Number of Passengers">
+            </div>
+            <% include ../components/form_message.ejs %>
+            <div class="text-right">
+                <button class="btn btn-outline-secondary form_submit"
+                    onclick="applib.forms.request_a_ride()">
+                Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

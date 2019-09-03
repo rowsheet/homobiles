@@ -1,0 +1,33 @@
+<div id="FORM_driver_login" class="card card_form purple">
+    <h5 class="card-header">
+        Driver Login
+    </h5>
+    <div class="card-body">
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="material-icons">
+                    directions_car
+                    </i>
+                </div>
+            </div>
+            <input type="text" class="form-control" id="username" placeholder="username">
+        </div>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="material-icons">
+                    lock
+                    </i>
+                </div>
+            </div>
+            <input type="password" class="form-control" id="password" placeholder="password">
+        </div>
+        <% include ../components/form_message.ejs %>
+        <div class="text-right">
+            <button class="btn btn-outline-secondary"
+                onclick="applib.forms.driver_login()">
+            Log In</button>
+        </div>
+    </div>
+</div>

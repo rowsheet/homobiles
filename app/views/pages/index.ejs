@@ -1,0 +1,17 @@
+<%- include("../common/static_page/top.ejs", {
+	body_style: "index"
+}) %>
+
+<div class="row" id="index_page">
+	<div class="col-lg-7">
+        <% include ../components/site_info.ejs %>
+        <br>
+	</div>
+	<div class="col-lg-5">
+		<%- include ../components/text_to_fetch.ejs %>
+		<%- include ../components/line_or.ejs %>
+        <% include ../forms/request_a_ride.ejs %>
+	</div>
+</div>
+
+<% include ../common/static_page/bottom.ejs %>

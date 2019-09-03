@@ -1,0 +1,55 @@
+<%- include("../common/app_page/top.ejs", {
+	body_style: "app_page"
+}) %>
+
+<div class="row">
+	<div class="col-md-3">
+	</div>
+	<div class="col-md-6">
+		<div class="content_container">
+			<h1 class="text-center">Sign Up</h1>
+			<h5 class="text-center">Sign up to see why Homobiles is different.</h5>
+			<br>
+			<br>
+            <div id="signup_forms">
+                <div class="tab-content">
+                    <div class="tab-pane container active" id="driver">
+                        <% include ../forms/driver_signup.ejs %>
+                    </div>
+                    <div class="tab-pane container fade" id="rider">
+                        <% include ../forms/rider_signup.ejs %>
+                    </div>
+                </div>
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#driver">
+                            Sign up as a driver instead.
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#rider">	
+                            Sign up as a rider instead.
+                        </a>
+                    </li>
+                </ul>
+            </div>
+			<p class="text-center">
+				Already have an account? Go to <a href="/login">login</a> instead.
+			</p>
+		</div>
+	</div>
+	<div class="col-md-3">
+	</div>
+</div>
+
+<style>
+#signup_forms li.nav-item {
+    width: 100%;
+    text-align: center;
+}
+#signup_forms a.nav-link.active {
+    display: none;
+}
+</style>
+
+<% include ../common/app_page/bottom.ejs %>

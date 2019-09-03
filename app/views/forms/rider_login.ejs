@@ -1,0 +1,34 @@
+<div id="FORM_rider_login" class="card card_form pink">
+    <h5 class="card-header">
+        Rider Login
+    </h5>
+    <div class="card-body">
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="material-icons">
+                    account_circle
+                    </i>
+                </div>
+            </div>
+            <input type="text" class="form-control" id="username" placeholder="username">
+        </div>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="material-icons">
+                    lock
+                    </i>
+                </div>
+            </div>
+            <input type="password" class="form-control" id="password" placeholder="password">
+        </div>
+        <% include ../components/form_message.ejs %>
+        <div class="text-right">
+            <button class="btn btn-outline-secondary"
+                onclick="applib.forms.rider_login()">
+            Log In
+            </button>
+        </div>
+    </div>
+</div>

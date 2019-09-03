@@ -1,0 +1,256 @@
+/*------------------------------------------------------------------------------
+Form Utils
+------------------------------------------------------------------------------*/
+.form_message.hidden {
+    display: none;
+}
+.input_error {
+    background: #ffecec;
+    color: red;
+}
+/*------------------------------------------------------------------------------
+Site Info
+------------------------------------------------------------------------------*/
+div#site_info * {
+    text-align: justify;
+}
+div#site_info h1,h2,h3 {
+    text-align: left !important;
+}
+div#site_info {
+    padding-right: 25px;
+}
+#index_page #site_info_text {
+    background: #ffffffa8;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 25px white, 0px 0px 25px white;
+}
+/*------------------------------------------------------------------------------
+Logo
+------------------------------------------------------------------------------*/
+a#logo {
+    font-size: 27px;
+    font-weight: bold !important;
+}
+/*------------------------------------------------------------------------------
+Main Nav
+------------------------------------------------------------------------------*/
+#main_nav {
+    padding-top: 11px;
+    padding-bottom: 10px;
+}
+/*------------------------------------------------------------------------------
+Line Or
+------------------------------------------------------------------------------*/
+.or_left {
+    border: 1px solid #907fae;
+    width: calc(50% - 25px);
+}
+.or_right {
+    border: 1px solid #907fae;
+    width: calc(50% - 25px);
+    float: right;
+    margin-top: -21px;
+}
+h5.or_center.text-center {
+    margin-top: -13px;
+    font-weight: bold !important;
+    color: #907fae;
+}
+.line_or {
+    margin-top: 33px;
+    margin-bottom: 19px;
+    padding-left: 31px;
+    padding-right: 31px;
+}
+/*------------------------------------------------------------------------------
+Standard Theme Font
+------------------------------------------------------------------------------*/
+* {
+	font-family: 'Josefin Sans', sans-serif;
+}
+.purple {
+    color: #907fae;
+    font-weight: 400 !important;
+}
+h1,h2,h3 {
+    color: #907fae;
+}
+h4,h5,h6,p {
+    color: #907fae;
+    font-weight: 300;
+}
+button,input,select,textarea {
+    font-weight: 300 !important;
+    color: #907fae !important;
+}
+input::placeholder {
+    color: #cacaca !important;
+}
+a {
+    font-weight: 300 !important;
+    color: #ee8ec0 !important;
+}
+a.nav-link {
+    font-weight: 300 !important;
+    color: #907fae !important;
+}
+/*------------------------------------------------------------------------------
+Standard Theme Buttons
+------------------------------------------------------------------------------*/
+.btn-outline-secondary:hover {
+    background: #907fae;
+}
+.btn-outline-secondary:hover {
+    background-image: linear-gradient(to bottom right, #fff6fe, #fffff0);
+    color: #907fae;
+    border-color: #907fae;
+}
+/*------------------------------------------------------------------------------
+Standard Theme Footer
+------------------------------------------------------------------------------*/
+.footer {
+    background: white;
+    box-shadow: 0px 0px 5px #00000012;
+}
+/*------------------------------------------------------------------------------
+Standard Theme Card Forms
+------------------------------------------------------------------------------*/
+.card_form {
+    border: none;
+    box-shadow: 0px 1px 3px #00000038;
+}
+.card_form .card-header {
+    border: none;
+}
+.card_form .input-group.mb-2 {
+    border: none !important;
+}
+.card_form .input-group-prepend {
+    border: none !important;
+}
+.card_form input {
+    border: none !important;
+}
+.card_form .input-group-text {
+}
+a {
+    color: #ee8ec0;
+}
+input {
+    box-shadow: 0px 0px 3px #00000042 inset;
+}
+/*------------------------------------------------------------------------------
+Background Bodies
+------------------------------------------------------------------------------*/
+body.index {
+    background-image: url(/public/img/splash.png), linear-gradient(to bottom right, #fff6fe, #fffff0);
+    background-color: #ffffff00;
+    background-blend-mode: color-burn;
+}
+body.details_page {
+    background-image: url(/public/img/splash.png), linear-gradient(to bottom right, #fff6fe, #fffff0);
+    background-color: #ffffffbd;
+    background-blend-mode: color-burn;
+}
+body.app_page {
+    background-image: linear-gradient(to bottom right, #fff6fe, #fffff0);
+}
+/*------------------------------------------------------------------------------
+Text to Fetch
+------------------------------------------------------------------------------*/
+#text_to_fetch_number {
+    font-weight: 400 !important;
+    color: #ee8ec0;
+}
+#text_to_fetch_tagline {
+    margin-bottom: 0px;
+    color: #907fae;
+}
+.card-body.text_to_fetch {
+    background: #fffafa;
+}
+p.text_to_fetch_info i {
+    color: #ee8ec0;
+    vertical-align:middle;
+    margin-top: -3px;
+}
+.text_to_fetch_info_box.text-left {
+    max-width: 213px;
+    margin: auto;
+    background: #fffbf900;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    padding-left: 9px;
+}
+p.text_to_fetch_info {
+    color: #5b369d;
+    margin-bottom: 0px;
+    line-height: 13px;
+    border-bottom: 1px dashed #907fae75;
+    padding-right: 10px;
+    padding-top: 7px;
+    padding-bottom: 6px;
+}
+p.text_to_fetch_info.last {
+    border-bottom: none;
+}
+.text_to_fetch_header {
+    background: #ee8ec0c9 !important;
+}
+#text_to_fetch_number {
+    text-align: center !important;
+}
+/*------------------------------------------------------------------------------
+Index Page Boxes
+------------------------------------------------------------------------------*/
+#index_page .card-header {
+    border-radius: 5px 5px 0px 0px !important;
+}
+#index_page .card-body {
+    border-radius: 5px !important;
+}
+#index_page .card {
+    border: none;
+    box-shadow: 0px 1px 11px #00000085;
+}
+/*------------------------------------------------------------------------------
+Footer
+------------------------------------------------------------------------------*/
+p.footer_sitemap_item {
+    height: 5px;
+}
+/*------------------------------------------------------------------------------
+Purple cards
+------------------------------------------------------------------------------*/
+.card.purple .card-header{
+    color: white;
+    background: #907fae;
+}
+.card.purple .card-body{
+    background: #907fae0f;
+}
+.card.purple .card-body .input-group-text {
+    border: none;
+    color: #907fae;
+    background: white;
+    border-left: 3px solid #907fae !important;
+}
+/*------------------------------------------------------------------------------
+Pink cards
+------------------------------------------------------------------------------*/
+.card.pink .card-header{
+    color: white;
+    background: #ee8ec0;
+}
+.card.pink .card-body{
+    background: #ee8ec00f;
+}
+.card.pink .card-body .input-group-text {
+    border: none;
+    color: #ee8ec0;
+    background: white;
+    border-left: 3px solid #ee8ec0 !important;
+}

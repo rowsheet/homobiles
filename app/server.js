@@ -1,8 +1,43 @@
 var express = require('express');
 var bodyParser = require('body-parser')
+var http = require('http');
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+function call_api(request, response) {
+    const options = {
+        hostname: 'localhost',
+        port: 5001,
+        path: '/',
+        method: 'POST',
+        headers : {
+            'Content-Type': 'application/json',
+        }
+    }
+
+    const req = http.request(options, res => {
+        res.on('data', d => {
+            console.log(res.headers["content-type"]);
+            response.writeHead(res.statusCode, {
+                "Content-Type": res.headers["content-type"],
+            });
+            response.write(d.toString('utf-8'));
+            response.end();
+        })
+    })
+
+    req.on('error', error => {
+        response.writeHead(503, {
+            "Content-Type": "application/json",
+        });
+        response.write("503");
+        response.end();
+    })
+
+    req.write(JSON.stringify(request.body));
+    req.end();
+}
 
 /*------------------------------------------------------------------------------
 Set the port the server should serve at.
@@ -31,59 +66,12 @@ Specifiy all pages that are in view/pages, i.e.
 app.get('/', function(request, response) {
 	response.render('pages/index')
 });
-const http = require('http');
-function call_api(request, response) {
-    const options = {
-        hostname: 'localhost',
-        port: 5001,
-        path: '/',
-        method: 'POST',
-        headers : {
-            'Content-Type': 'application/json',
-        }
-    }
-
-    const req = http.request(options, res => {
-        console.log(`statusCode: ${res.statusCode}`)
-        res.on('data', d => {
-            console.log("DATA: " + d.toString('utf-8'))
-            console.log(typeof(res.statusCode));
-            response.writeHead(res.statusCode, {
-                "Content-Type": "application/json",
-            });
-            response.write(d.toString('utf-8'));
-            response.end();
-        })
-    })
-
-    req.on('error', error => {
-        res.on('data', d => {
-            response.writeHead(503, {
-                "Content-Type": "application/json",
-            });
-            response.write();
-            response.end();
-        })
-    })
-
-    req.write(JSON.stringify(request.body));
-    req.end();
-}
+/*
+API Calls to other domains will result in CORS errors, so API requests have to
+be sent to this web server where the request will be forwarded to the actual
+API url.
+*/
 app.post('/', function(request, response) {
-    // console.log("request.body:");
-    // console.log(request.body);
-    // console.log(typeof(request.body));
-    // console.log(JSON.stringify(request.body));
-    /*
-    response.writeHead(200, {
-        "Content-Type": "application/json",
-    })
-    response.write(JSON.stringify({
-        "error": false,
-        "data": "OK"
-    }))
-    response.end();
-    */
     call_api(request, response);
 });
 app.get('/for-drivers', function(request, response) {

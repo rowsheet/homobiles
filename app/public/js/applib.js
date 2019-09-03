@@ -1,7 +1,3 @@
-var urls = {
-    api: "localhost:5001"
-}
-
 var applib = {
     init: function() {
         console.log("init");
@@ -100,6 +96,7 @@ function driver_signup() {
         form_error(errors, form_id);
     } else {
         data = {
+            "command": "driver_signup",
             "username": username,
             "pronoun": pronoun,
             "first_name": first_name,
@@ -116,9 +113,7 @@ function driver_signup() {
             "yes_no_criminal_history": yes_no_criminal_history,
             "comments": comments,
         }
-        console.log(data);
-        clear_form_messages(form_id);
-        form_success("OK", form_id);
+        submit_form(form_id, data);
     }
 }
 
@@ -154,6 +149,7 @@ function rider_signup() {
         form_error(errors, form_id);
     } else {
         data = {
+            "command": "rider_signup",
             "username": username,
             "pronoun": pronoun,
             "first_name": first_name,
@@ -161,9 +157,7 @@ function rider_signup() {
             "password": password,
             "repeat_password": repeat_password,
         }
-        console.log(data);
-        clear_form_messages(form_id);
-        form_success("OK", form_id);
+        submit_form(form_id, data);
     }
 }
 
@@ -183,12 +177,11 @@ function driver_login() {
         form_error(errors, form_id);
     } else {
         data = {
+            "command": "driver_login",
             "username": username,
             "password": password,
         }
-        console.log(data);
-        clear_form_messages(form_id);
-        form_success("OK", form_id);
+        submit_form(form_id, data);
     }
 }
 
@@ -208,12 +201,11 @@ function rider_login() {
         form_error(errors, form_id);
     } else {
         data = {
+            "command": "rider_login",
             "username": username,
             "password": password,
         }
-        console.log(data);
-        clear_form_messages(form_id);
-        form_success("OK", form_id);
+        submit_form(form_id, data);
     }
 }
 
@@ -241,71 +233,61 @@ function request_a_ride() {
         form_error(errors, form_id);
     } else {
         data = {
-            "command": "test_401",
+            "command": "request_a_ride",
             "name": name,
             "start_location": start_location,
             "end_location": end_location,
             "passenger_count": passenger_count,
         }
-        $.ajax({
-            "url": "/",
-            // "data": JSON.stringify(data),
-            "contentType": "application/json",
-            "data": JSON.stringify(data),
-            "type": "POST",
-            "statusCode": {
-                200: function(resp) {
-                    console.log("200");
-                    $("#" + selector + "_error").addClass("hidden");
-                    $("#" + selector + "_error_msg").html("");
-                    $("#" + selector + "_success").removeClass("hidden");
-                    $("#" + selector + "_success_msg").html(resp);
-                    console.log("RESP: " + resp);
-                },
-                302: function(resp) {
-                    console.log("302");
-                    console.log(resp.responseText);
-                    window.location.href = resp.responseText;
-                },
-                500: function(err) {
-                    console.log("500");
-                    $("#" + selector + "_success").addClass("hidden");
-                    $("#" + selector + "_success_msg").html("");
-                    $("#" + selector + "_error_msg").html(err.responseText);
-                    $("#" + selector + "_error").removeClass("hidden");
-                },
-                503: function(err) {
-                    console.log("503");
-                    $("#" + selector + "_success").addClass("hidden");
-                    $("#" + selector + "_success_msg").html("");
-                    $("#" + selector + "_error_msg").html(err.responseText);
-                    $("#" + selector + "_error").removeClass("hidden");
-                },
-                400: function(err) {
-                    console.log("400");
-                    $("#" + selector + "_success").addClass("hidden");
-                    $("#" + selector + "_success_msg").html("");
-                    $("#" + selector + "_error_msg").html(err.responseText);
-                    $("#" + selector + "_error").removeClass("hidden");
-                },
-                403: function(err) {
-                    console.log("403");
-                    $("#" + selector + "_success").addClass("hidden");
-                    $("#" + selector + "_success_msg").html("");
-                    $("#" + selector + "_error_msg").html(err.responseText);
-                    $("#" + selector + "_error").removeClass("hidden");
-                }
-            }
-        })
-        console.log(data);
-        clear_form_messages(form_id);
-        form_success("OK", form_id);
+        submit_form(form_id, data);
     }
 }
 
 /*------------------------------------------------------------------------------
 Form Utils
 ------------------------------------------------------------------------------*/
+
+function submit_form(form_id, data) {
+    $.ajax({
+        "url": "/",
+        "contentType": "application/json",
+        "data": JSON.stringify(data),
+        "type": "POST",
+        "statusCode": {
+            200: function(resp) {
+                console.log("200");
+                console.log(resp);
+                clear_form_messages(form_id);
+                form_success([resp], form_id);
+            },
+            302: function(resp) {
+                console.log("302");
+                console.log(resp.responseText);
+                window.location.href = resp.responseText;
+            },
+            500: function(err) {
+                console.log("500");
+                console.error(err);
+                form_error(["There was an unknown error."], form_id);
+            },
+            503: function(err) {
+                console.log("503");
+                console.error(err);
+                form_error(["This service is temporarily down at this time."], form_id);
+            },
+            400: function(err) {
+                console.log("400");
+                console.log(err.responseText);
+                form_error([err.responseText], form_id);
+            },
+            403: function(err) {
+                console.log("403");
+                console.error(err);
+                form_error([err.responseText], form_id);
+            }
+        }
+    })
+}
 
 function clear_form_messages(form_id) {
     $("#" + form_id).find("*").removeClass("input_error");

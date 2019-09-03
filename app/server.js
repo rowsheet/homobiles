@@ -1,5 +1,8 @@
 var express = require('express');
+var bodyParser = require('body-parser')
 var app = express();
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 /*------------------------------------------------------------------------------
 Set the port the server should serve at.
@@ -27,6 +30,61 @@ Specifiy all pages that are in view/pages, i.e.
 -----------------------------------------------------------------------------*/
 app.get('/', function(request, response) {
 	response.render('pages/index')
+});
+const http = require('http');
+function call_api(request, response) {
+    const options = {
+        hostname: 'localhost',
+        port: 5001,
+        path: '/',
+        method: 'POST',
+        headers : {
+            'Content-Type': 'application/json',
+        }
+    }
+
+    const req = http.request(options, res => {
+        console.log(`statusCode: ${res.statusCode}`)
+        res.on('data', d => {
+            console.log("DATA: " + d.toString('utf-8'))
+            console.log(typeof(res.statusCode));
+            response.writeHead(res.statusCode, {
+                "Content-Type": "application/json",
+            });
+            response.write(d.toString('utf-8'));
+            response.end();
+        })
+    })
+
+    req.on('error', error => {
+        res.on('data', d => {
+            response.writeHead(503, {
+                "Content-Type": "application/json",
+            });
+            response.write();
+            response.end();
+        })
+    })
+
+    req.write(JSON.stringify(request.body));
+    req.end();
+}
+app.post('/', function(request, response) {
+    // console.log("request.body:");
+    // console.log(request.body);
+    // console.log(typeof(request.body));
+    // console.log(JSON.stringify(request.body));
+    /*
+    response.writeHead(200, {
+        "Content-Type": "application/json",
+    })
+    response.write(JSON.stringify({
+        "error": false,
+        "data": "OK"
+    }))
+    response.end();
+    */
+    call_api(request, response);
 });
 app.get('/for-drivers', function(request, response) {
 	response.render('pages/for-drivers')

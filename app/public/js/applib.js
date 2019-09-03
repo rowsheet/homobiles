@@ -1,3 +1,7 @@
+var urls = {
+    api: "localhost:5001"
+}
+
 var applib = {
     init: function() {
         console.log("init");
@@ -237,11 +241,62 @@ function request_a_ride() {
         form_error(errors, form_id);
     } else {
         data = {
+            "command": "test_401",
             "name": name,
             "start_location": start_location,
             "end_location": end_location,
             "passenger_count": passenger_count,
         }
+        $.ajax({
+            "url": "/",
+            // "data": JSON.stringify(data),
+            "contentType": "application/json",
+            "data": JSON.stringify(data),
+            "type": "POST",
+            "statusCode": {
+                200: function(resp) {
+                    console.log("200");
+                    $("#" + selector + "_error").addClass("hidden");
+                    $("#" + selector + "_error_msg").html("");
+                    $("#" + selector + "_success").removeClass("hidden");
+                    $("#" + selector + "_success_msg").html(resp);
+                    console.log("RESP: " + resp);
+                },
+                302: function(resp) {
+                    console.log("302");
+                    console.log(resp.responseText);
+                    window.location.href = resp.responseText;
+                },
+                500: function(err) {
+                    console.log("500");
+                    $("#" + selector + "_success").addClass("hidden");
+                    $("#" + selector + "_success_msg").html("");
+                    $("#" + selector + "_error_msg").html(err.responseText);
+                    $("#" + selector + "_error").removeClass("hidden");
+                },
+                503: function(err) {
+                    console.log("503");
+                    $("#" + selector + "_success").addClass("hidden");
+                    $("#" + selector + "_success_msg").html("");
+                    $("#" + selector + "_error_msg").html(err.responseText);
+                    $("#" + selector + "_error").removeClass("hidden");
+                },
+                400: function(err) {
+                    console.log("400");
+                    $("#" + selector + "_success").addClass("hidden");
+                    $("#" + selector + "_success_msg").html("");
+                    $("#" + selector + "_error_msg").html(err.responseText);
+                    $("#" + selector + "_error").removeClass("hidden");
+                },
+                403: function(err) {
+                    console.log("403");
+                    $("#" + selector + "_success").addClass("hidden");
+                    $("#" + selector + "_success_msg").html("");
+                    $("#" + selector + "_error_msg").html(err.responseText);
+                    $("#" + selector + "_error").removeClass("hidden");
+                }
+            }
+        })
         console.log(data);
         clear_form_messages(form_id);
         form_success("OK", form_id);

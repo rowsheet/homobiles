@@ -1,14 +1,17 @@
 var express = require('express');
 var bodyParser = require('body-parser')
-var http = require('http');
+var https = require('https');
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 function call_api(request, response) {
     const options = {
-        hostname: 'localhost',
-        port: 5001,
+        // hostname: 'localhost',
+        // port: 5001, // Local dev test
+        // port: 8006, // Local docker test
+        hostname: 'api.homobiles.org',
+        port: 443,
         path: '/',
         method: 'POST',
         headers : {
@@ -16,7 +19,7 @@ function call_api(request, response) {
         }
     }
 
-    const req = http.request(options, res => {
+    const req = https.request(options, res => {
         res.on('data', d => {
             console.log(res.headers["content-type"]);
             response.writeHead(res.statusCode, {
@@ -28,6 +31,8 @@ function call_api(request, response) {
     })
 
     req.on('error', error => {
+        console.log("ERROR");
+        console.log(error);
         response.writeHead(503, {
             "Content-Type": "application/json",
         });

@@ -259,6 +259,7 @@ function submit_form(form_id, data) {
                 console.log(resp);
                 clear_form_messages(form_id);
                 form_success([resp], form_id);
+                $("#" + form_id + " button").attr("onclick", "").unbind("click");
             },
             302: function(resp) {
                 console.log("302");

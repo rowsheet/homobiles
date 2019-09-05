@@ -248,46 +248,67 @@ Form Utils
 ------------------------------------------------------------------------------*/
 
 function submit_form(form_id, data) {
-    $.ajax({
-        "url": "/",
-        "contentType": "application/json",
-        "data": JSON.stringify(data),
-        "type": "POST",
-        "statusCode": {
-            200: function(resp) {
-                console.log("200");
-                console.log(resp);
-                clear_form_messages(form_id);
-                form_success([resp], form_id);
-                $("#" + form_id + " button").attr("onclick", "").unbind("click");
-            },
-            302: function(resp) {
-                console.log("302");
-                console.log(resp.responseText);
-                window.location.href = resp.responseText;
-            },
-            500: function(err) {
-                console.log("500");
-                console.error(err);
-                form_error(["There was an unknown error."], form_id);
-            },
-            503: function(err) {
-                console.log("503");
-                console.error(err);
-                form_error(["This service is temporarily down at this time."], form_id);
-            },
-            400: function(err) {
-                console.log("400");
-                console.log(err.responseText);
-                form_error([err.responseText], form_id);
-            },
-            403: function(err) {
-                console.log("403");
-                console.error(err);
-                form_error([err.responseText], form_id);
-            }
-        }
-    })
+    // var test = '6LeoZbYUAAAAAJAN7NGGbFuT8qNKGPdKyqG6IgRR';
+    grecaptcha.ready(function() {
+        console.log("FORM_ID: " + form_id);
+        grecaptcha.execute(
+            '6LeoZbYUAAAAAP3yjdxMcf4uLfxFDiE_razm0koU',
+            {action: form_id})
+        .then(function(token) {
+            console.log("DATA: " + data);
+            console.log("TOKEN RECIEVED: " + token);
+            data['_grecaptcha_token'] = token;
+            $.ajax({
+                "url": "/",
+                "contentType": "application/json",
+                "data": JSON.stringify(data),
+                "type": "POST",
+                "statusCode": {
+                    200: function(resp) {
+                        console.log("200");
+                        console.log(resp);
+                        clear_form_messages(form_id);
+                        form_success([resp], form_id);
+                        $("#" + form_id + " button").attr("onclick", "").unbind("click");
+                    },
+                    302: function(resp) {
+                        console.log("302");
+                        console.log(resp.responseText);
+                        window.location.href = resp.responseText;
+                    },
+                    500: function(err) {
+                        console.log("500");
+                        console.error(err);
+                        form_error(["There was an unknown error."], form_id);
+                    },
+                    503: function(err) {
+                        console.log("503");
+                        console.error(err);
+                        form_error([
+                            "This service is temporarily down at this time."
+                        ], form_id);
+                    },
+                    400: function(err) {
+                        console.log("400");
+                        console.log(err.responseText);
+                        form_error([err.responseText], form_id);
+                    },
+                    403: function(err) {
+                        console.log("403");
+                        console.error(err);
+                        form_error([err.responseText], form_id);
+                    },
+                    404: function(err) {
+                        console.log("404");
+                        console.error(err);
+                        form_error([
+                            "This service is temporarily down at this time."
+                        ], form_id);
+                    },
+                }
+            })
+        });
+    });
 }
 
 function clear_form_messages(form_id) {

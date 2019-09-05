@@ -18,12 +18,11 @@ function get_config(config) {
     return config.toLowerCase().replace(/[^0-9a-z]/gi, '')
 }
 
-function call_api(request, response) {
+RECAPTCHA_SECRET = "6LeoZbYUAAAAAJAN7NGGbFuT8qNKGPdKyqG6IgRR";
+RECAPTCHA_MIN_SCORE = 0.7
 
-    console.log("request.body: ");
-    console.log(request.body);
-
-    const options = {
+function call_api(USER_req, USER_resp) {
+    const API_request_opt = {
         hostname: 'localhost',
         port: 5201, // Local dev test
         // port: 8006, // Local docker test
@@ -35,98 +34,69 @@ function call_api(request, response) {
             'Content-Type': 'application/json',
         }
     }
-
-    if (request.body.hasOwnProperty("_grecaptcha_token") == false) {
-        console.log("NO TOKEN");
-        response.writeHead(503, {
+    if (USER_req.body.hasOwnProperty("_grecaptcha_token") == false) {
+        USER_resp.writeHead(503, {
             "Content-Type": "application/json",
         });
-        response.write("403");
-        response.end("Invalid reCAPTCHA token.");
+        USER_resp.write("403");
+        USER_resp.end("Missing reCAPTCHA token.");
     } else {
-
-        token = request.body._grecaptcha_token;
-        console.log("token: " + token);
-
-        GR_requestData = "secret=6LeoZbYUAAAAAJAN7NGGbFuT8qNKGPdKyqG6IgRR&response=" + token;
-        console.log("GR_requestData:");
-        console.log(GR_requestData);
-
-        const GR_options = {
+        token = USER_req.body._grecaptcha_token;
+        const GOOGLE_req_opt = {
             hostname: 'www.google.com',
             port: 443,
-            path: '/recaptcha/api/siteverify?' + GR_requestData,
+            path: "/recaptcha/api/siteverify?secret=" + RECAPTCHA_SECRET + "&response=" + token,
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
         }
-
-        console.log("GR_request start...");
-        const GR_request = https.request(GR_options, GR_response => {
-            console.log("GR API 200");
-            GR_response.on('data', GR_ResponseData => {
-                console.log("GR_ResponseData: " + GR_ResponseData);
-                GR_ResponseDataJSON = JSON.parse(GR_ResponseData);
-                console.log("success: " + GR_ResponseDataJSON.success);
-                if (GR_ResponseDataJSON.success == true) {
-                    if (GR_ResponseDataJSON.score >= 0.7) {
-
-                        console.log("IN GR RESPONSE: " + JSON.stringify(request.body));
-
-                        const req = http.request(options, res => {
-                            res.on('data', apiResponseData => {
-                                console.log("API 200");
-                                console.log(res.headers);
-                                response.writeHead(res.statusCode, res.headers);
-                                response.write(apiResponseData);
-                                response.end();
+        const GOOGLE_req = https.request(GOOGLE_req_opt, GOOGLE_resp => {
+            GOOGLE_resp.on('data', GOOGLE_resp_data => {
+                GOOGLE_resp_dataJSON = JSON.parse(GOOGLE_resp_data);
+                if (GOOGLE_resp_dataJSON.success == true) {
+                    if (GOOGLE_resp_dataJSON.score >= RECAPTCHA_MIN_SCORE) {
+                        const API_req = http.request(API_request_opt, res => {
+                            res.on('data', API_resp_data => {
+                                USER_resp.writeHead(res.statusCode, res.headers);
+                                USER_resp.write(API_resp_data);
+                                USER_resp.end();
                             })
                         })
-
-                        req.on('error', error => {
-                            console.log("API ERROR");
-                            console.log("error: " + error);
-                            response.writeHead(503, {
+                        API_req.on('error', error => {
+                            USER_resp.writeHead(503, {
                                 "Content-Type": "application/json",
                             });
-                            response.write("503");
-                            response.end();
+                            USER_resp.write("503");
+                            USER_resp.end();
                         })
-
-                        req.write(JSON.stringify(request.body));
-                        req.end();
-
+                        API_req.write(JSON.stringify(USER_req.body));
+                        API_req.end();
                     } else {
-                        response.writeHead(403, {
+                        USER_resp.writeHead(403, {
                             "Content-Type": "application/json",
                         });
-                        response.write("Suspicious request, ignored.");
-                        response.end();
+                        USER_resp.write("Suspicious request, ignored.");
+                        USER_resp.end();
                     }
                 } else {
-                    response.writeHead(500, {
+                    USER_resp.writeHead(500, {
                         "Content-Type": "application/json",
                     });
-                    response.write("Error verifying reCAPTCHA token.");
-                    response.end();
+                    USER_resp.write("Error verifying reCAPTCHA token.");
+                    USER_resp.end();
                 }
             })
         })
-
-        GR_request.on('error', error => {
-            console.log("GR API ERROR");
-            console.log("error: " + error);
-            response.writeHead(403, {
+        GOOGLE_req.on('error', error => {
+            USER_resp.writeHead(403, {
                 "Content-Type": "application/json",
             });
-            response.write("Unable to validate reCAPTCHA token.");
-            response.end();
+            USER_resp.write("Unable to validate reCAPTCHA token.");
+            USER_resp.end();
         })
-
-        GR_request.write("");
-        GR_request.end();
-
+        GOOGLE_req.write("");
+        GOOGLE_req.end();
     }
 }
 

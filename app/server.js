@@ -99,9 +99,11 @@ app.get('/why-homobiles', function(request, response) {
 app.get('/signup', function(request, response) {
 	response.render('pages/signup')
 });
+/*
 app.get('/login', function(request, response) {
 	response.render('pages/login')
 });
+*/
 app.get('*', function(request, response) {
 	response.status(404).render('pages/page_404')
 });

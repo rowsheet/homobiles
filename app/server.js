@@ -34,70 +34,22 @@ function call_api(USER_req, USER_resp) {
             'Content-Type': 'application/json',
         }
     }
-    if (USER_req.body.hasOwnProperty("_grecaptcha_token") == false) {
+    const API_req = http.request(API_request_opt, res => {
+        res.on('data', API_resp_data => {
+            USER_resp.writeHead(res.statusCode, res.headers);
+            USER_resp.write(API_resp_data);
+            USER_resp.end();
+        })
+    })
+    API_req.on('error', error => {
         USER_resp.writeHead(503, {
             "Content-Type": "application/json",
         });
-        USER_resp.write("403");
-        USER_resp.end("Missing reCAPTCHA token.");
-    } else {
-        token = USER_req.body._grecaptcha_token;
-        const GOOGLE_req_opt = {
-            hostname: 'www.google.com',
-            port: 443,
-            path: "/recaptcha/api/siteverify?secret=" + RECAPTCHA_SECRET + "&response=" + token,
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-        }
-        const GOOGLE_req = https.request(GOOGLE_req_opt, GOOGLE_resp => {
-            GOOGLE_resp.on('data', GOOGLE_resp_data => {
-                GOOGLE_resp_dataJSON = JSON.parse(GOOGLE_resp_data);
-                if (GOOGLE_resp_dataJSON.success == true) {
-                    if (GOOGLE_resp_dataJSON.score >= RECAPTCHA_MIN_SCORE) {
-                        const API_req = http.request(API_request_opt, res => {
-                            res.on('data', API_resp_data => {
-                                USER_resp.writeHead(res.statusCode, res.headers);
-                                USER_resp.write(API_resp_data);
-                                USER_resp.end();
-                            })
-                        })
-                        API_req.on('error', error => {
-                            USER_resp.writeHead(503, {
-                                "Content-Type": "application/json",
-                            });
-                            USER_resp.write("503");
-                            USER_resp.end();
-                        })
-                        API_req.write(JSON.stringify(USER_req.body));
-                        API_req.end();
-                    } else {
-                        USER_resp.writeHead(403, {
-                            "Content-Type": "application/json",
-                        });
-                        USER_resp.write("Suspicious request, ignored.");
-                        USER_resp.end();
-                    }
-                } else {
-                    USER_resp.writeHead(500, {
-                        "Content-Type": "application/json",
-                    });
-                    USER_resp.write("Error verifying reCAPTCHA token.");
-                    USER_resp.end();
-                }
-            })
-        })
-        GOOGLE_req.on('error', error => {
-            USER_resp.writeHead(403, {
-                "Content-Type": "application/json",
-            });
-            USER_resp.write("Unable to validate reCAPTCHA token.");
-            USER_resp.end();
-        })
-        GOOGLE_req.write("");
-        GOOGLE_req.end();
-    }
+        USER_resp.write("503");
+        USER_resp.end();
+    })
+    API_req.write(JSON.stringify(USER_req.body));
+    API_req.end();
 }
 
 /*------------------------------------------------------------------------------

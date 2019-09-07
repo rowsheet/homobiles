@@ -1,6 +1,6 @@
 <html>
 	<% include ../../partials/app_page/header.ejs %>
-	<body class="d-flex flex-column <%= body_style %>">
+	<body class="d-flex flex-column <% if (locals.body_style){ %><%= body_style %><% } %>">
 		<% include ../../partials/app_page/nav.ejs %>
 		<main>
 			<div class="container">

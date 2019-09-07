@@ -3,22 +3,26 @@
         Driver Sign Up
     </h5>
     <div class="card-body">
+        <% if (false) { %>
         <div class="input-group mb-2">
             <input type="text" class="form-control" id="username" placeholder="Username">
         </div>
-        <% include ../components/form_components/pronouns.ejs %>
+        <% } %>
         <div class="input-group mb-2">
             <input type="text" class="form-control" id="first_name" placeholder="First Name">
         </div>
         <div class="input-group mb-2">
             <input type="text" class="form-control" id="last_name" placeholder="Last Name">
         </div>
+        <% include ../components/form_components/pronouns.ejs %>
+        <% if (false) { %>
         <div class="input-group mb-2">
             <input type="password" class="form-control" id="password" placeholder="Password">
         </div>
         <div class="input-group mb-2">
             <input type="password" class="form-control" id="repeat_password" placeholder="Repeat Password">
         </div>
+        <% } %>
         <% include ../components/form_components/smartphone_type.ejs %>
         <hr>
         <% include ../components/form_components/vehicle_year.ejs %>

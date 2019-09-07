@@ -29,12 +29,12 @@ function get_radio_bool(form_id, name) {
 
 function driver_signup() {
     form_id = "FORM_driver_signup";
-    username = $("#" + form_id + " #username").val();
+    // username = $("#" + form_id + " #username").val();
     pronoun = $("#" + form_id + " #pronoun :selected").val();
     first_name = $("#" + form_id + " #first_name").val();
     last_name = $("#" + form_id + " #last_name").val();
-    password = $("#" + form_id + " #password").val();
-    repeat_password = $("#" + form_id + " #repeat_password").val();
+    // password = $("#" + form_id + " #password").val();
+    // repeat_password = $("#" + form_id + " #repeat_password").val();
     smartphone_type = $("#" + form_id + " #smartphone_type").val();
     vehicle_year = $("#" + form_id + " #vehicle_year").val();
     vehicle_make = $("#" + form_id + " #vehicle_make").val();
@@ -46,9 +46,11 @@ function driver_signup() {
     comments = "";
     comments = $("#" + form_id + " #comments").val();
     errors = {};
+    /*
     if (username == "") {
         errors["username"] = "Username is required."
     }
+    */
     if (pronoun == "Pronoun") {
         errors["pronoun"] = "Pronoun is required."
     }
@@ -58,12 +60,14 @@ function driver_signup() {
     if (last_name == "") {
         errors["last_name"] = "Last name is required."
     }
+    /*
     if (password == "") {
         errors["password"] = "Password is required."
     }
     if (repeat_password == "") {
         errors["repeat_password"] = "Repeated password is required."
     }
+    */
     if (smartphone_type == "Smartphone Type") {
         errors["smartphone_type"] = "Smartphone type is required."
     }
@@ -97,12 +101,12 @@ function driver_signup() {
     } else {
         data = {
             "command": "driver_signup",
-            "username": username,
+            // "username": username,
             "pronoun": pronoun,
             "first_name": first_name,
             "last_name": last_name,
-            "password": password,
-            "repeat_password": repeat_password,
+            // "password": password,
+            // "repeat_password": repeat_password,
             "smartphone_type": smartphone_type,
             "vehicle_year": vehicle_year,
             "vehicle_make": vehicle_make,

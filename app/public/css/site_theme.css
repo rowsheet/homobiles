@@ -82,14 +82,20 @@ h4,h5,h6,p {
     font-weight: 300;
 }
 button,input,select,textarea {
+    font-weight: 200 !important;
+    color: black !important;
+}
+::placeholder {
     font-weight: 300 !important;
-    color: #cacaca !important;
 }
 input::placeholder {
     color: #cacaca !important;
 }
-input::placeholder {
+select {
     color: #cacaca !important;
+}
+textarea::placeholder {
+    color: #cacaca !important
 }
 a {
     font-weight: 300 !important;
@@ -125,7 +131,7 @@ Standard Theme Card Forms
     /* border: 2px; */
     /* border-color: #5b369d; */
 }
-.card-header {
+#signup .card-header {
     background: none !important;
 }
 .card_form {
@@ -142,9 +148,6 @@ Standard Theme Card Forms
 .card_form .form-control {
     border-radius: 00px 100px 100px 00px !important;
     border: 0px;
-}
-#special_req.form-control {
-    border-radius: 100px 100px 100px 100px !important;    
 }
 #signup_forms .form-control {
     border-radius: 00px 100px 100px 00px !important;
@@ -241,16 +244,27 @@ p.text_to_fetch_info.last {
 Index Page Boxes
 ------------------------------------------------------------------------------*/
 #index_page .card-header {
-    border-radius: 100px !important;
-    background-color: none;
+    border-radius: 17px 17px 0px 0px !important;
+    background-color: white;
 }
 #index_page .card-body {
-    border-radius: 5px !important;
-    background-color: #907fae0f;
+    border-radius: 0px 0px 17px 17px !important;
+    background-color: rgb(251, 251, 250);
 }
 #index_page .card {
     border: none;
     /* box-shadow: 0px 1px 11px #00000085; */
+}
+
+/*------------------------------------------------------------------------------
+Request a ride form
+------------------------------------------------------------------------------*/
+#FORM_request_a_ride .card-body {
+    /* background-color: aliceblue; */
+}
+#FORM_request_a_ride .card-header{
+    background-color: #907fae;
+    color: white;
 }
 /*------------------------------------------------------------------------------
 Footer
@@ -278,7 +292,7 @@ Purple cards
 Pink cards
 ------------------------------------------------------------------------------*/
 .card.pink .card-header{
-    color: #ee8ec0;
+    color: white;
     /* background: #ee8ec0; */
 }
 .card.pink .card-body{

@@ -161,30 +161,6 @@ function rider_signup() {
     }
 }
 
-function driver_login() {
-    form_id = "FORM_driver_login";
-    username = $("#" + form_id + " #username").val();
-    password = $("#" + form_id + " #password").val();
-    errors = {};
-    if (username == "") {
-        errors["username"] = "Username is required."
-    }
-    if (password == "") {
-        errors["password"] = "Password is required."
-    }
-    if (Object.keys(errors).length > 0) {
-        console.log(errors);
-        form_error(errors, form_id);
-    } else {
-        data = {
-            "command": "driver_login",
-            "username": username,
-            "password": password,
-        }
-        submit_form(form_id, data);
-    }
-}
-
 function rider_login() {
     form_id = "FORM_rider_login";
     username = $("#" + form_id + " #username").val();
@@ -202,6 +178,30 @@ function rider_login() {
     } else {
         data = {
             "command": "rider_login",
+            "username": username,
+            "password": password,
+        }
+        submit_form(form_id, data);
+    }
+}
+
+function driver_login() {
+    form_id = "FORM_driver_login";
+    username = $("#" + form_id + " #username").val();
+    password = $("#" + form_id + " #password").val();
+    errors = {};
+    if (username == "") {
+        errors["username"] = "Username is required."
+    }
+    if (password == "") {
+        errors["password"] = "Password is required."
+    }
+    if (Object.keys(errors).length > 0) {
+        console.log(errors);
+        form_error(errors, form_id);
+    } else {
+        data = {
+            "command": "driver_login",
             "username": username,
             "password": password,
         }

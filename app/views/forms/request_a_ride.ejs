@@ -8,11 +8,55 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">
                         <i class="material-icons">
-                        person
+                        person 
                         </i>
                     </div>
                 </div>
-                <input type="text" class="form-control" id="name" placeholder="Your Name">
+                <input type="text" class="form-control" id="name"
+                    placeholder="Your Name">
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="material-icons">
+                        record_voice_over
+                        </i>
+                    </div>
+                </div>
+                <select id="pronoun" class="form-control">
+                    <option value="">
+                        Pronoun
+                    </option>
+                    <option value="masculine">
+                        He/Him/His
+                    </option>
+                    <option value="feminine">
+                        She/Her/Hers
+                    </option>
+                    <option value="neutral">
+                        They/Them/Theirs
+                    </option>
+                    <option value="neutral">
+                        Ze/Zir/Zirs
+                    </option>
+                    <option value="neutral">
+                        Ze/Hir/Hirs
+                    </option>
+                    <option value="other">
+                        Other 
+                    </option>
+                </select>
+            </div>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="material-icons">
+                        phone_iphone 
+                        </i>
+                    </div>
+                </div>
+                <input type="text" class="form-control" id="phone_number"
+                    placeholder="Your Phone Number">
             </div>
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -22,7 +66,7 @@
                         </i>
                     </div>
                 </div>
-                <input type="text" class="form-control" id="start_location" placeholder="Starting Point">
+                <input type="text" class="form-control" id="start_location" placeholder="Pickup Address">
             </div>
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -32,7 +76,7 @@
                         </i>
                     </div>
                 </div>
-                <input type="text" class="form-control" id="end_location" placeholder="Destination">
+                <input type="text" class="form-control" id="end_location" placeholder="Destination Address">
             </div>
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -44,12 +88,28 @@
                 </div>
                 <input type="number" class="form-control" id="passenger_count" placeholder="Number of Passengers">
             </div>
-            <% include ../components/form_message.ejs %>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="material-icons">
+                        work
+                        </i>
+                    </div>
+                </div>
+                <input type="number" class="form-control" id="num_bags" placeholder="Number of Bags">
+            </div>
+            <div class="input-group mb-2">
+                <textarea id="special_req" class="form-control" placeholder="Special requests"></textarea>
+            </div>
+            <div class="form_message form_error alert alert-danger hidden">
+</div>
+<div class="form_message form_success alert alert-success hidden">
+</div>
+
             <div class="text-right">
-                <button class="btn btn-outline-secondary form_submit"
+                <button class="btn btn-outline-secondary"
                     onclick="applib.forms.request_a_ride()">
-                Submit
-                </button>
+                Request a Ride</button>
             </div>
         </div>
     </div>

@@ -83,7 +83,10 @@ h4,h5,h6,p {
 }
 button,input,select,textarea {
     font-weight: 300 !important;
-    color: #907fae !important;
+    color: #cacaca !important;
+}
+input::placeholder {
+    color: #cacaca !important;
 }
 input::placeholder {
     color: #cacaca !important;
@@ -117,33 +120,59 @@ Standard Theme Footer
 /*------------------------------------------------------------------------------
 Standard Theme Card Forms
 ------------------------------------------------------------------------------*/
+.card {
+    background: none !important;
+    /* border: 2px; */
+    /* border-color: #5b369d; */
+}
+.card-header {
+    background: none !important;
+}
 .card_form {
-    border: none;
-    box-shadow: 0px 1px 3px #00000038;
+    /* box-shadow: 0px 1px 3px #00000038; */
+    border-color: #5b369d;
+    /* background-color: #5b369d; */
 }
 .card_form .card-header {
     border: none;
 }
-.card_form .input-group.mb-2 {
+.card_form .input-group .mb-2 {
     border: none !important;
 }
-.card_form .input-group-prepend {
+.card_form .form-control {
+    border-radius: 00px 100px 100px 00px !important;
+    border: 0px;
+}
+#special_req.form-control {
+    border-radius: 100px 100px 100px 100px !important;    
+}
+#signup_forms .form-control {
+    border-radius: 00px 100px 100px 00px !important;
+}
+#open-input.form-control {
+    border-radius: 100px 100px 100px 100px !important;
+}
+.card-input .input-group-prepend {
     border: none !important;
 }
 .card_form input {
     border: none !important;
 }
-.card_form .input-group-text {
-}
+/* .card_form .input-group-text {
+} */
 a {
     color: #ee8ec0;
 }
 input {
-    box-shadow: 0px 0px 3px #00000042 inset;
+    /* box-shadow: 0px 0px 3px #00000042 inset; */
+    border: 2px;
+    border-color: #907fae0f
 }
-input.form-control {
-    border-radius: 0px 100px 100px 0px !important;
+.input-group .input-group-prepend .input-group-text {
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
 }
+
 
 /*------------------------------------------------------------------------------
 Background Bodies
@@ -173,7 +202,8 @@ Text to Fetch
     color: #907fae;
 }
 .card-body.text_to_fetch {
-    background: #fffafa;
+    /* background: #fffafa; */
+    background: none;
 }
 p.text_to_fetch_info i {
     color: #ee8ec0;
@@ -184,7 +214,7 @@ p.text_to_fetch_info i {
     max-width: 213px;
     margin: auto;
     background: #fffbf900;
-    border-radius: 5px;
+    border-radius: 100px;
     padding-top: 10px;
     padding-bottom: 8px;
     padding-left: 9px;
@@ -211,14 +241,16 @@ p.text_to_fetch_info.last {
 Index Page Boxes
 ------------------------------------------------------------------------------*/
 #index_page .card-header {
-    border-radius: 5px 5px 0px 0px !important;
+    border-radius: 100px !important;
+    background-color: none;
 }
 #index_page .card-body {
     border-radius: 5px !important;
+    background-color: #907fae0f;
 }
 #index_page .card {
     border: none;
-    box-shadow: 0px 1px 11px #00000085;
+    /* box-shadow: 0px 1px 11px #00000085; */
 }
 /*------------------------------------------------------------------------------
 Footer
@@ -230,27 +262,27 @@ p.footer_sitemap_item {
 Purple cards
 ------------------------------------------------------------------------------*/
 .card.purple .card-header{
-    color: white;
-    background: #907fae;
+    color: #907fae;
+    /* background-color: #907fae; */
 }
 .card.purple .card-body{
-    background: #907fae0f;
+    /* background: #907fae0f; */
 }
 .card.purple .card-body .input-group-text {
     border: none;
     color: #907fae;
     background: white;
-    border-left: 3px solid #907fae !important;
+    border-left: 3px solid #907fae !important;    
 }
 /*------------------------------------------------------------------------------
 Pink cards
 ------------------------------------------------------------------------------*/
 .card.pink .card-header{
-    color: white;
-    background: #ee8ec0;
+    color: #ee8ec0;
+    /* background: #ee8ec0; */
 }
 .card.pink .card-body{
-    background: #ee8ec00f;
+    /* background: #ee8ec00f; */
 }
 .card.pink .card-body .input-group-text {
     border: none;

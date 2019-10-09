@@ -72,6 +72,7 @@ div#text_break_circle img {
     max-width: 225px;
     width: 225px;
     object-fit: scale-down;
+    /* box-shadow: 0px 0px 25px rgb(233, 188, 233), 0px 0px 25px white; */
 }
 div#text_break_no_circle img {
     /* border-radius: 50%; */
@@ -188,6 +189,7 @@ div#star p {
     z-index: 1;
     top: 66px;
     left: 84px;
+    padding-left: 0px;
 }
 /*------------------------------------------------------------------------------
 Standard Theme Buttons
@@ -360,11 +362,14 @@ div#illustration img{
 /*------------------------------------------------------------------------------
 Info pages
 ------------------------------------------------------------------------------*/
+div#textblob{
+    text-align: justify;
+    text-size-adjust: auto;
+}
 #for_drivers_page{
     background-color: #C3F9FE !important;
 }
 div#for_drivers_page p{
-    padding-right: 15px;
     text-size-adjust: auto;
 }
 #for_riders_page{
@@ -377,6 +382,10 @@ div#for_riders_page p{
 p.quote {
     margin-left: 40px;
     margin-right: 40px;
+}
+p.page_header {
+    font-size: 38px;
+    font-weight: 400;
 }
 /*------------------------------------------------------------------------------
 Request a ride form

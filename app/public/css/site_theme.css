@@ -9,6 +9,13 @@ Form Utils
     color: #ff5565;
 }
 /*------------------------------------------------------------------------------
+Row
+------------------------------------------------------------------------------*/
+.row {
+    margin-left: auto;
+    margin-right: auto;
+}
+/*------------------------------------------------------------------------------
 Site Info
 ------------------------------------------------------------------------------*/
 div#site_info * {
@@ -28,7 +35,9 @@ div#site_info_text p {
 div#site_info {
     padding-right: 25px;
 }
-#index_page #site_info_text {
+#index_page #site_info_text,
+#for_page #for_riders_page,
+#for_page #for_drivers_page {
     padding: 10px;
     /* background: #ffffffa8; */
     /* border-radius: 5px; */
@@ -41,16 +50,19 @@ a#logo {
     font-size: 27px;
     font-weight: bold !important;
 }
-#for_page.container-fluid{
-    padding-right: 0px;
-}
 div#text_break_circle {
-    position: relative;
     width: 225px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
 }
 div#text_break_no_circle {
-    position: relative;
     width: 225px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
 }
 div#text_break_circle img {
     border-radius: 50%;
@@ -158,6 +170,10 @@ div#text_break_circle #starlogo {
 div#starlogo {
     left: 400px;
     position: absolute;
+}
+div#for_page #starlogo {
+    left: 0px;
+    position: relative;
 }
 div#star p {
     font-family: 'Nunito', sans-serif;
@@ -346,9 +362,9 @@ Info pages
 ------------------------------------------------------------------------------*/
 #for_drivers_page{
     background-color: #C3F9FE !important;
-    padding-right: 15px;
 }
 div#for_drivers_page p{
+    padding-right: 15px;
     text-size-adjust: auto;
 }
 #for_riders_page{
@@ -358,7 +374,10 @@ div#for_drivers_page p{
 div#for_riders_page p{
     text-size-adjust: auto;
 }
-
+p.quote {
+    margin-left: 40px;
+    margin-right: 40px;
+}
 /*------------------------------------------------------------------------------
 Request a ride form
 ------------------------------------------------------------------------------*/

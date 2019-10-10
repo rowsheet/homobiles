@@ -31,6 +31,8 @@ div#site_info_text p {
     color: white;
     text-overflow: ellipsis;
     text-size-adjust: auto;
+    /* text-align: left; */
+    /* height: 100%; */
 }
 div#site_info {
     padding-right: 25px;
@@ -169,8 +171,8 @@ div#text_break_circle #starlogo {
     display: inline-block;
 }
 div#starlogo {
-    left: 400px;
-    position: absolute;
+    left: 0px;
+    position: relative;
 }
 div#for_page #starlogo {
     left: 0px;
@@ -208,6 +210,9 @@ Standard Theme Footer
 .footer {
     background: white;
     box-shadow: 0px 0px 5px #00000012;
+}
+#copyright {
+    width: 100%;
 }
 /*------------------------------------------------------------------------------
 Standard Theme Card Forms
@@ -268,12 +273,12 @@ Background Bodies
 body.index {
     /* background-image: url(/public/img/splash.png), linear-gradient(to bottom right, #fff6fe, #fffff0); */
     background-color:white;
-    background-blend-mode: color-burn;
+    /* background-blend-mode: color-burn; */
 }
 body.details_page {
     /* background-image: url(/public/img/splash.png), linear-gradient(to bottom right, #fff6fe, #fffff0); */
     background-color: white;
-    background-blend-mode: color-burn;
+    /* background-blend-mode: color-burn; */
 }
 body.app_page {
     background-image: linear-gradient(to bottom right, #fff6fe, #fffff0);
@@ -328,12 +333,15 @@ p.text_to_fetch_info.last {
 Index Page Boxes
 ------------------------------------------------------------------------------*/
 #info_section{
-    background-color: #201668;
+    /* background-color: #201668; */
     width: 100%;
     margin: 0;
-}
-div#jumbotron-content {
-    margin-top: 250px;
+    background-image: url(/public/img/city-coloured.jpeg);
+    background-color: #281c69; 
+    /* #231a56 */
+    background-blend-mode: color-dodge;
+    background-repeat: no-repeat;
+    object-fit: contain;
 }
 div#illustration img{
     width: 200px;

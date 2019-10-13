@@ -337,9 +337,9 @@ Index Page Boxes
     width: 100%;
     margin: 0;
     background-image: url(/public/img/city-coloured.jpeg);
-    background-color: #281c69; 
+    background-color: #7a6dbd; 
     /* #231a56 */
-    background-blend-mode: color-dodge;
+    background-blend-mode: color-burn;
     background-repeat: no-repeat;
     object-fit: contain;
 }

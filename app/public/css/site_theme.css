@@ -29,8 +29,17 @@ div#site_info h1,h2,h3 {
     text-overflow: ellipsis;
     text-size-adjust: auto;
     max-width: 700px;
-    text-align: justify !important;
     margin: auto;
+}
+h3.index_info,
+h4.index_info,
+h5.index_info,
+h6.index_info {
+    text-align: justify;
+}
+h1.index_info,
+h2.index_info {
+    text-align: left;
 }
 div#site_info {
     padding-right: 25px;

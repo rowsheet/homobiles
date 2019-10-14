@@ -1,18 +1,16 @@
 <div id="FORM_rider_signup" class="card card_form pink">
     <h5 class="card-header">
-        Rider Signup
+        2 of 3
     </h5>
     <div class="card-body">
-        <% include ../components/form_components/user_info.ejs %>
         <% include ../components/form_components/pronouns.ejs %>
-        <% include ../components/form_message.ejs %>
+        <% include ../components/form_components/smartphone_provider.ejs %>
         <div class="text-right">
-            <div class="alert alert-danger text-left" role="alert">
-                WARNING: This feature is non-functional and still in development mode.
-            </div>
             <button class="btn btn-outline-secondary"
                 onclick="applib.forms.rider_signup()">
-            Sign Up
+                <i class="material-icons">
+                        arrow_forward
+                    </i>
             </button>
         </div>
     </div>

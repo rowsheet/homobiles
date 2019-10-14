@@ -109,8 +109,16 @@
                 </div>
                 <input type="number" class="form-control" id="num_bags" placeholder="Number of Bags">
             </div>
-            <div class="input-group mb-2">
-                <textarea id="special_req" class="form-control" placeholder="Special requests"></textarea>
+            <div>
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="material-icons">
+                            accessibility_new
+                        </i>
+                    </div>
+                    <textarea id="special_req" class="form-control" placeholder="Special requests"></textarea>
+                </div>
+                <br>
             </div>
             <% include ../components/form_message.ejs %>
             <div class="text-right">

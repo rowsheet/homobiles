@@ -1,6 +1,6 @@
 <div id="FORM_driver_signup" class="card card_form purple">
     <h5 class="card-header">
-        Driver Sign Up
+        Create an account
     </h5>
     <div class="card-body">
         <% if (false) { %>
@@ -26,65 +26,67 @@
         <% include ../components/form_components/smartphone_type.ejs %>
         <hr>
         <% include ../components/form_components/vehicle_year.ejs %>
-        <% include ../components/form_components/vehicle_make.ejs %>
-        <div class="input-group mb-2">
-            <input type="text" class="form-control" id="vehicle_model" placeholder="Vehicle Model">
-        </div>
+        <% include ../components/form_components/vehicle_make&model.ejs %>
+
         <% include ../components/form_components/vehicle_doors.ejs %>
         <hr>
-        <p id="yes_no_square">Do you have square (squareup.com) or something similar to allow you to accept credit card donations?</p>
+        <p id="yes_no_square">Do you have square (squareup.com) or something similar to allow you to accept credit card
+            donations?</p>
         <div class="form-check-inline">
             <input class="form-check-input" type="radio" name="yes_no_square" id="true" value="true">
             <label class="form-check-label" for="true">
-            true
+                true
             </label>
         </div>
         <div class="form-check-inline">
             <input class="form-check-input" type="radio" name="yes_no_square" id="false" value="false">
             <label class="form-check-label" for="false">
-            false
+                false
             </label>
         </div>
         <hr>
         <p id="yes_no_insurance">Do you have comprehensive (full) insurance on your vehicle?</p>
-        <p style="color: blue; margin-top: -15px;">Note: Drivers are required to have comprehensive (full) insurance on their vehicle.</p>
+        <p style="color: purple; margin-top: -15px; font-size: 80%; margin-left: 10px; margin-right: 10px;">Note: Drivers are required to have comprehensive (full) insurance on their vehicle.
+        </p>
         <div class="form-check-inline">
             <input class="form-check-input" type="radio" name="yes_no_insurance" id="true" value="true">
             <label class="form-check-label" for="true">
-            true
+                true
             </label>
         </div>
         <div class="form-check-inline">
             <input class="form-check-input" type="radio" name="yes_no_insurance" id="false" value="false">
             <label class="form-check-label" for="false">
-            false
+                false
             </label>
         </div>
         <hr>
         <p id="yes_no_criminal_history">Do you consent to a criminal history background check and drug testing?</p>
-        <p style="color: blue; margin-top: -15px;">Note: Applicants selected as volunteer drivers will be required to undergo a criminal history background check and a drug test.</p>
+        <p style="color: purple; margin-top: -15px; font-size: 80%; margin-left: 10px; margin-right: 10px;">Note: Applicants selected as volunteer drivers will be required to
+            undergo a criminal history background check and a drug test.</p>
         <div class="form-check-inline">
             <input class="form-check-input" type="radio" name="yes_no_criminal_history" id="true" value="true">
             <label class="form-check-label" for="true">
-            true
+                true
             </label>
         </div>
         <div class="form-check-inline">
             <input class="form-check-input" type="radio" name="yes_no_criminal_history" id="false" value="false">
             <label class="form-check-label" for="false">
-            false
+                false
             </label>
         </div>
         <hr>
-        <p>Use this area to tell us anything you like, such as why you want to drive for us, the shifts you'd like to volunteer, etc.</p>
-        <div class="input-group mb-2">
+        <p>
+            Use this area to tell us anything you like, such as why you want to drive for us, the shifts you'd like to volunteer, etc.
+        </p>
+        <div class="input-group mb-2" id="open-input">
             <textarea class="form-control" id="comments"></textarea>
         </div>
         <% include ../components/form_message.ejs %>
         <div class="text-right">
-            <button class="btn btn-outline-secondary"
-                onclick="applib.forms.driver_signup()">
-            Sign Up</button>
+            <button class="btn btn-outline-secondary" onclick="applib.forms.driver_signup()">
+                Sign Up</button>
         </div>
     </div>
 </div>

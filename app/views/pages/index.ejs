@@ -1,16 +1,19 @@
 <%- include("../common/static_page/top.ejs", {
-	body_style: "index"
+	body_style: "index",
+    main_class: "index_page",
 }) %>
-
-<div class="row" id="index_page">
-	<div class="col-lg-7">
-        <% include ../components/site_info.ejs %>
-        <br>
-	</div>
-	<div class="col-lg-5">
-		<%- include ../components/text_to_fetch.ejs %>
+<div class="col-sm-12" id="info_section">
+    <% include ../components/site_info.ejs %>
+    <br>
+</div>
+<div class="row container-fluid" id="index_page">
+	<div class="col-sm-12" id="form_section">
+			<br>
+		<% include ../forms/request_a_ride.ejs %>
+		<br>
 		<%- include ../components/line_or.ejs %>
-        <% include ../forms/request_a_ride.ejs %>
+		<br>
+		<%- include ../components/text_to_fetch.ejs %>
 	</div>
 </div>
 

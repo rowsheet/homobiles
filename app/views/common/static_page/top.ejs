@@ -2,5 +2,5 @@
 	<% include ../../partials/static_page/header.ejs %>
 	<body class="d-flex flex-column <% if (locals.body_style){ %><%= body_style %><% } %>">
 		<% include ../../partials/static_page/nav.ejs %>
-		<main>
-			<div class="container">
+		<main class="<% if (locals.main_class){ %><%= main_class%><% } %>">
+			<div>

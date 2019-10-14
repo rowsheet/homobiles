@@ -19,6 +19,8 @@ source ./creds
 
 docker service create \
     --env PORT="$PORT" \
+    --env API_HOSTNAME="$API_HOSTNAME" \
+    --env API_PORT="$API_PORT" \
     --publish 8005:80 \
     --name $SERVICE_NAME \
     rowsheet/$REPO_NAME:dev

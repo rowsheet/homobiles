@@ -1,55 +1,74 @@
 var express = require('express');
 var bodyParser = require('body-parser')
-var http = require('http');
-var https = require('https');
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-APP_CONFIG = {
-    "DEPLOYMENT_MODE": "dev",
-    "API_HOSTNAME": "localhost",
-    "API_PORT": "5200",
-    "API_PATH": "/",
-    "API_SSL": false,
+API_HOSTNAME = process.env.API_HOSTNAME;
+API_PORT = process.env.API_PORT;
+
+/*------------------------------------------------------------------------------
+Using https for localhost will result in a cert validation error, so
+use http instead of https if API_HOSTNAME == localhost.
+-----------------------------------------------------------------------------*/
+var http = require('https');
+if (API_HOSTNAME == "localhost") {
+    http = require('http');
 }
 
-function get_config(config) {
-    return config.toLowerCase().replace(/[^0-9a-z]/gi, '')
-}
+var request = require('request');
 
-RECAPTCHA_SECRET = "6LeoZbYUAAAAAJAN7NGGbFuT8qNKGPdKyqG6IgRR";
-RECAPTCHA_MIN_SCORE = 0.7
+console.log("API_HOSTNAME: " + API_HOSTNAME);
+console.log("API_PORT: " + API_PORT);
 
 function call_api(USER_req, USER_resp) {
-    const API_request_opt = {
-        hostname: 'localhost',
-        port: 5201, // Local dev test
-        // port: 8006, // Local docker test
-        // hostname: 'api.homobiles.org',
-        // port: 443,
-        path: '/',
-        method: 'POST',
+    console.log("Got call_api");
+    var body = JSON.stringify(USER_req.body)
+    console.log(body);
+    request.post({
+        url : API_HOSTNAME,
         headers : {
             'Content-Type': 'application/json',
-        }
-    }
-    const API_req = http.request(API_request_opt, res => {
+        },
+        body: body,
+    }, function(error, response, body) {
+        console.log("Got call_api -> got response");
+        console.log("response.statusCode");
+        console.log(response.statusCode);
+        console.log("response.headers");
+        console.log(response.headers);
+        console.log("response.body");
+        console.log(response.body);
+        USER_resp.writeHead(response.statusCode, response.headers);
+        USER_resp.write(response.body);
+        USER_resp.end();
+    });        
+    /*
+    console.log(API_request_opt);
+    console.log("Got call_api -> defined request");
+    var API_req = http.request(API_request_opt, res => {
+        console.log("Got call_api -> data");
         res.on('data', API_resp_data => {
+            console.log("Got call_api -> API_resp");
+            console.log(API_resp_data.toString('utf-8'));
             USER_resp.writeHead(res.statusCode, res.headers);
             USER_resp.write(API_resp_data);
             USER_resp.end();
         })
-    })
-    API_req.on('error', error => {
+    }).on('error', error => {
+        console.log("Got call_api -> error");
         USER_resp.writeHead(503, {
             "Content-Type": "application/json",
         });
         USER_resp.write("503");
         USER_resp.end();
     })
-    API_req.write(JSON.stringify(USER_req.body));
-    API_req.end();
+    /*
+    .on('end', () => {
+        API_req.write(JSON.stringify(USER_req.body));
+        API_req.end();
+    });
+    */
 }
 
 /*------------------------------------------------------------------------------
@@ -76,7 +95,7 @@ app.set('view engine', 'ejs');
 Specifiy all pages that are in view/pages, i.e.
 	view/pages/index.ejs
 -----------------------------------------------------------------------------*/
-app.get('/', function(request, response) {
+app.get('/', function(req, response) {
 	response.render('pages/index')
 });
 /*
@@ -84,27 +103,27 @@ API Calls to other domains will result in CORS errors, so API requests have to
 be sent to this web server where the request will be forwarded to the actual
 API url.
 */
-app.post('/', function(request, response) {
-    call_api(request, response);
+app.post('/', function(req, response) {
+    call_api(req, response);
 });
-app.get('/for-drivers', function(request, response) {
+app.get('/for-drivers', function(req, response) {
 	response.render('pages/for-drivers')
 });
-app.get('/for-riders', function(request, response) {
+app.get('/for-riders', function(req, response) {
 	response.render('pages/for-riders')
 });
-app.get('/why-homobiles', function(request, response) {
+app.get('/why-homobiles', function(req, response) {
 	response.render('pages/why-homobiles')
 });
-app.get('/signup', function(request, response) {
+app.get('/signup', function(req, response) {
 	response.render('pages/signup')
 });
 /*
-app.get('/login', function(request, response) {
+app.get('/login', function(req, response) {
 	response.render('pages/login')
 });
 */
-app.get('*', function(request, response) {
+app.get('*', function(req, response) {
 	response.status(404).render('pages/page_404')
 });
 

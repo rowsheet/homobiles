@@ -1,0 +1,5 @@
+export PORT="5200"
+# export API_HOSTNAME="https://api.homobiles.org/"
+# export API_PORT="443"
+export API_HOSTNAME="localhost"
+export API_PORT="5201"

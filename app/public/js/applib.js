@@ -216,12 +216,26 @@ function rider_login() {
 function request_a_ride() {
     form_id = "FORM_request_a_ride";
     name = $("#" + form_id + " #name").val();
+    pickup_time = $("#" + form_id + " #pickup_time").val();
+    phone_number = $("#" + form_id + " #phone_number").val();
+    pronoun = $("#" + form_id + " #pronoun ").val();
     start_location = $("#" + form_id + " #start_location").val();
     end_location = $("#" + form_id + " #end_location").val();
     passenger_count = $("#" + form_id + " #passenger_count").val();
+    num_bags = $("#" + form_id + " #num_bags").val();
+    special_req = $("#" + form_id + " #special_req").val();
     errors = {};
     if (name == "") {
         errors["name"] = "Name is required."
+    }
+    if (pickup_time == "") {
+        errors["pickup_time"] = "Pickup time is required."
+    }
+    if (phone_number == "") {
+        errors["phone_number"] = "Phone number is required."
+    }
+    if (pronoun == "") {
+        errors["pronoun"] = "Pronoun is required."
     }
     if (start_location == "") {
         errors["start_location"] = "Starting point is required."
@@ -232,6 +246,12 @@ function request_a_ride() {
     if (passenger_count == "") {
         errors["passenger_count"] = "There must be at least one passenger."
     }
+    if (num_bags == "") {
+        errors["num_bags"] = "Number of bags is required."
+    }
+    if (special_req == "") {
+        special_req = "None"
+    }
     if (Object.keys(errors).length > 0) {
         console.log(errors);
         form_error(errors, form_id);
@@ -239,9 +259,14 @@ function request_a_ride() {
         data = {
             "command": "request_a_ride",
             "name": name,
+            "pickup_time": pickup_time,
+            "phone_number": phone_number,
+            "pronoun": pronoun,
             "start_location": start_location,
             "end_location": end_location,
             "passenger_count": passenger_count,
+            "num_bags": num_bags,
+            "special_req": special_req,
         }
         submit_form(form_id, data);
     }
